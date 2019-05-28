@@ -9,7 +9,7 @@ modules:
    parameters:
      memory: 256M
      disk-quota: 256M
-     buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git#v1.6.24   # temporary fix
+     buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git#v1.6.50
    requires:
      - name: itelo-hdi-container
      - name: itelo-logging
