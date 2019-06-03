@@ -12,8 +12,8 @@ node(){
   }
 
   stage('Deploy')   {
-      undeployAppIfPresent()
-      cloudFoundryDeploy script:this, deployTool:'mtaDeployPlugin'
+      // undeployAppIfPresent()
+      cloudFoundryDeploy script:this, deployTool:'mtaDeployPlugin', undeployMtaFirst: true
   }
 }
 
