@@ -19,6 +19,7 @@ node(){
 
 def cleanupPreviousDeployment() {
     try {
+        def app_id = (readYaml (file: 'mta.yaml')).ID
         dockerExecute(script: this, dockerImage: "s4sdk/docker-cf-cli") {
             def config = commonPipelineEnvironment.configuration.steps.cloudFoundryDeploy
             withCredentials([usernamePassword(
@@ -33,7 +34,7 @@ def cleanupPreviousDeployment() {
                     cf login -u ${username} -p '${password}' -a ${config.cloudFoundry.apiEndpoint} -o \"${config.cloudFoundry.org}\" -s \"${config.cloudFoundry.space}\"
                     cf install-plugin multiapps -f
                     cf plugins
-                    cf undeploy cloud.samples.itelo --delete-services -f"""
+                    cf undeploy ${app_id} --delete-services -f""" //TODO: retrieve ID from mta.yaml
                 sh "cf logout"
             }
         }
